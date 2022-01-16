@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>###</th>
+                <th>List of Inventories: </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="inventory : ${inventories}">
+                <td th:text="${inventory.name}"></td>
+                <td th:text="${inventory.count}"></td>
+                <td th:text="${inventory.value}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
