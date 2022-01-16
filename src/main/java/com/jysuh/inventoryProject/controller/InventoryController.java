@@ -20,21 +20,22 @@ public class InventoryController {
     }
 
     @GetMapping("/inventories/new")
-    public String createForm(){
+    public String createForm(Model model){
+        model.addAttribute("form", new InventoryForm());
         return "inventories/createNewInventoryForm";
     }
 
-    @PostMapping(value = "/inventories/new")
+    @PostMapping("/inventories/new")
     public String createInventory(InventoryForm form) {
         Inventory inventory = new Inventory();
         inventory.setName(form.getName());
-        inventory.setCount(form.getCount());
-        inventory.setValue(form.getValue());
+        inventory.setPrice(form.getPrice());
+        inventory.setQuantity(form.getQuantity());
         inventoryService.create(inventory);
         return "redirect:/";
     }
 
-    @GetMapping(value = "/inventories")
+    @GetMapping("/inventories")
     public String list(Model model) {
         List<Inventory> inventories = inventoryService.findInventories();
         model.addAttribute("inventories", inventories);

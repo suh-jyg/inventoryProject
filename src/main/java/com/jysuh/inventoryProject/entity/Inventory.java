@@ -1,8 +1,14 @@
 package com.jysuh.inventoryProject.entity;
 
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "inventory")
 public class Inventory {
@@ -12,9 +18,9 @@ public class Inventory {
 
     private String name;
 
-    private Integer count;
+    private Integer quantity;
 
-    private Integer value;
+    private Integer price;
 
     public Integer getId() {
         return id;
@@ -32,19 +38,20 @@ public class Inventory {
         this.name = name;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public Integer getValue() {
-        return value;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
+
 }
