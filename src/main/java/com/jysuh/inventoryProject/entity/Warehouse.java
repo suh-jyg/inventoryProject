@@ -30,14 +30,11 @@ public class Warehouse {
 
   public void addWarehouseInventory(WarehouseInventory warehouseInventory) {
     warehouseInventories.add(warehouseInventory);
-    warehouseInventory.setWarehouse(this);
   }
 
-  public static Warehouse createWarehouse(WarehouseInventory... warehouseInventories) {
+  public static Warehouse createWarehouse(String name) {
     Warehouse warehouse = new Warehouse();
-    for (WarehouseInventory warehouseInventory : warehouseInventories) {
-      warehouse.addWarehouseInventory(warehouseInventory);
-    }
+    warehouse.setName(name);
     return warehouse;
   }
 

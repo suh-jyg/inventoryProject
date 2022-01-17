@@ -28,6 +28,7 @@ public class InventoryService {
     inventory.ifPresent(i -> i.setDescription(desc));
   }
 
+  @Transactional
   public void deleteInventoryById(Integer inventoryId) {
     inventoryRepository.deleteById(inventoryId);
   }

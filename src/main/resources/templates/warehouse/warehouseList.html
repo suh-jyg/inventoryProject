@@ -10,8 +10,7 @@
             <thead>
             <tr>
                 <th>Name of Warehouse</th>
-                <th>List of Inventories</th>
-                <th>Add more Inventories</th>
+                <th>Assigned Inventory</th>
                 <th>Edit name</th>
                 <th>Delete</th>
                 <th></th>
@@ -20,11 +19,9 @@
             <tbody>
             <tr th:each="warehouse : ${warehouses}">
                 <td th:text="${warehouse.name}"></td>
-                <td><a class="btn btn-primary" th:href="@{/warehouse/{id} (id=${warehouse.id})}">See the List</a></td>
-                <td><a class="btn btn-primary" th:href="@{/warehouse/{id}/add (id=${warehouse.id})}">Add</a></td>
-                <td><a class="btn btn-primary" th:href="@{/warehouse/{id}/edit (id=${warehouse.id})}">Update</a></td>
-                <td><a class="btn btn-danger" th:href="@{/warehouse/{id}/delete (id=${warehouse.id})}">Delete</a></td>
-
+                <td><a class="btn btn-primary" th:href="@{/warehouse/{id} (id=${warehouse.id})}">Click</a></td>
+                <td><a class="btn btn-primary" th:href="@{/warehouse/{id}/edit (id=${warehouse.id})}">Click</a></td>
+                <td><a class="btn btn-danger" th:href="@{/warehouse/{id}/delete (id=${warehouse.id})}">Click</a></td>
             </tr>
             </tbody>
         </table>

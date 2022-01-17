@@ -12,7 +12,7 @@
 
     <div class="form-group">
       <label for="inventory">Item name</label>
-      <select name="id" id="inventory" class="form-control">
+      <select name="inventoryId" id="inventory" class="form-control">
         <option value="">Select an item</option>
         <option th:each="inventory : ${inventories}"
                 th:value="${inventory.id}"

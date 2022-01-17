@@ -28,9 +28,9 @@ public class WarehouseController {
   }
 
   @PostMapping("/warehouse/new")
-  public String createWarehouse(WarehouseForm form, Model model, @RequestParam("id") Integer id) {
+  public String createWarehouse(WarehouseForm form, Model model, @RequestParam("inventoryId") Integer inventoryId) {
     String name = form.getName();
-    warehouseService.create(name, id);
+    warehouseService.create(name, inventoryId);
     return "redirect:/warehouse";
   }
 
@@ -44,7 +44,8 @@ public class WarehouseController {
   @GetMapping("warehouse/{warehouseId}")
   public String getWarehouseContent(@PathVariable("warehouseId") Integer warehouseId, Model model) {
     Warehouse warehouse = warehouseService.findById(warehouseId);
-    List<WarehouseInventory> warehouseInventories = warehouseService.findWarehouseInventories(warehouseId);
+    List<WarehouseInventory> warehouseInventories =
+        warehouseService.findWarehouseInventories(warehouseId);
     model.addAttribute("warehouse", warehouse);
     model.addAttribute("warehouseInventories", warehouseInventories);
     return "warehouse/warehouse";
@@ -63,7 +64,9 @@ public class WarehouseController {
   }
 
   @PostMapping("warehouse/{warehouseId}/edit")
-  public String updateWarehouse(@PathVariable("warehouseId") Integer warehouseId, @ModelAttribute("form") InventoryForm form) {
+  public String updateWarehouse(
+      @PathVariable("warehouseId") Integer warehouseId,
+      @ModelAttribute("form") InventoryForm form) {
     warehouseService.updateWarehouse(warehouseId, form.getName());
     return "redirect:/warehouse";
   }

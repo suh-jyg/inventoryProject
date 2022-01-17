@@ -21,30 +21,24 @@ public class WarehouseService {
   }
 
   @Transactional
-  public Integer create(String name, Integer warehouseId) {
-    Optional<Inventory> optional = inventoryRepository.findById(warehouseId);
-    Inventory inventory = null;
-    if (optional.isPresent()) {
-      inventory = optional.get();
-    } else {
-      throw new RuntimeException(" Warehouse not found for id :: " + warehouseId);
-    }
+  public Integer create(String name, Integer inventoryId) {
+    Inventory inventory = removeOptionalInv(inventoryRepository.findById(inventoryId));
+    Warehouse warehouse = Warehouse.createWarehouse(name);
 
-    WarehouseInventory warehouseInventory = WarehouseInventory.createWarehouseInventory(inventory);
-    Warehouse warehouse = Warehouse.createWarehouse(warehouseInventory);
-    warehouse.setName(name);
+    WarehouseInventory warehouseInventory = WarehouseInventory.createWarehouseInventory(inventory, warehouse);
+    warehouse.addWarehouseInventory(warehouseInventory);
 
     warehouseRepository.save(warehouse);
-
     return warehouse.getId();
   }
 
   @Transactional
   public void updateWarehouse(Integer warehouseId, String name) {
-    Optional<Warehouse> warehouse = warehouseRepository.findById(warehouseId);
-    warehouse.ifPresent(i -> i.setName(name));
+    Warehouse warehouse = removeOptionalWare(warehouseRepository.findById(warehouseId));
+    warehouse.setName(name);
   }
 
+  @Transactional
   public void deleteWarehouseById(Integer warehouseId) {
     warehouseRepository.deleteById(warehouseId);
   }
@@ -74,4 +68,25 @@ public class WarehouseService {
     }
     return warehouse.getWarehouseInventories();
   }
+
+  public Inventory removeOptionalInv(Optional<Inventory> optionalInv) {
+    Inventory inventory = null;
+    if (optionalInv.isPresent()) {
+      inventory = optionalInv.get();
+    } else {
+      throw new RuntimeException(" No ID found");
+    }
+    return inventory;
+  }
+
+  public Warehouse removeOptionalWare(Optional<Warehouse> optionalWare) {
+    Warehouse warehouse = null;
+    if (optionalWare.isPresent()) {
+      warehouse = optionalWare.get();
+    } else {
+      throw new RuntimeException(" No ID found");
+    }
+    return warehouse;
+  }
+
 }

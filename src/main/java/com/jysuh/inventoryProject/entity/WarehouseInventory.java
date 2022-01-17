@@ -30,10 +30,10 @@ public class WarehouseInventory {
   @JoinColumn(name = "warehouse_id")
   private Warehouse warehouse;
 
-  public static WarehouseInventory createWarehouseInventory(Inventory inventory) {
+  public static WarehouseInventory createWarehouseInventory(Inventory inventory, Warehouse warehouse) {
     WarehouseInventory warehouseInventory = new WarehouseInventory();
     warehouseInventory.setInventory(inventory);
-
+    warehouseInventory.setWarehouse(warehouse);
     return warehouseInventory;
   }
 }
