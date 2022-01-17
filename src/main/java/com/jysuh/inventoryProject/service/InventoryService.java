@@ -3,6 +3,7 @@ package com.jysuh.inventoryProject.service;
 import com.jysuh.inventoryProject.controller.InventoryForm;
 import com.jysuh.inventoryProject.entity.Inventory;
 import com.jysuh.inventoryProject.repository.InventoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

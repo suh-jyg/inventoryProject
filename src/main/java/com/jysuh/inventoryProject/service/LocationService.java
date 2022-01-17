@@ -21,7 +21,7 @@ public class LocationService {
   }
 
   @Transactional
-  public Integer createLocation(String name, Integer inventoryId) {
+  public Location createLocation(String name, Integer inventoryId) {
     Inventory inventory = returnInventory(inventoryRepository.findById(inventoryId));
     Location location = Location.createLocation(name);
 
@@ -29,7 +29,7 @@ public class LocationService {
     location.addLocationInventory(locationInventory);
 
     locationRepository.save(location);
-    return location.getId();
+    return location;
   }
 
   @Transactional
