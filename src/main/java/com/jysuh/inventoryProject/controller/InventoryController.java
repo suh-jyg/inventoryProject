@@ -18,7 +18,8 @@ public class InventoryController {
   private final InventoryService inventoryService;
 
   // Creates new inventory
-  // Uses the InventoryForm class and add its variable to the thymeleaf, and posts using below method
+  // Uses the InventoryForm class and add its variable to the thymeleaf, and posts using below
+  // method
   @GetMapping("/inventory/new")
   public String createForm(Model model) {
     model.addAttribute("form", new InventoryForm());
@@ -47,11 +48,7 @@ public class InventoryController {
     Inventory inventory = inventoryService.findById(inventoryID);
     model.addAttribute("inventory", inventory);
 
-    InventoryForm inventoryForm = InventoryForm.builder()
-            .name(inventory.getName())
-            .type(inventory.getType())
-            .description(inventory.getDescription())
-            .build();
+    InventoryForm inventoryForm = inventoryService.createInventoryForm(inventory);
 
     model.addAttribute("form", inventoryForm);
     return "inventory/updateInventoryForm";

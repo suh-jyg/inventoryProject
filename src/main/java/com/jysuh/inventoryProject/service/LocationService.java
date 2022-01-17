@@ -1,5 +1,6 @@
 package com.jysuh.inventoryProject.service;
 
+import com.jysuh.inventoryProject.controller.LocationForm;
 import com.jysuh.inventoryProject.entity.Inventory;
 import com.jysuh.inventoryProject.entity.Location;
 import com.jysuh.inventoryProject.entity.LocationInventory;
@@ -17,13 +18,15 @@ public class LocationService {
   private final InventoryRepository inventoryRepository;
 
   // Creates the location, and the locationInventory at the same time.
-  // locationInventory is saved as list for the scalability - TODO: to develop further, allow locations to have multiple inventories
+  // locationInventory is saved as list for the scalability - TODO: to develop further, allow
+  // locations to have multiple inventories
   @Transactional
   public Location createLocation(String name, Integer inventoryId) {
     Inventory inventory = returnInventory(inventoryRepository.findById(inventoryId));
     Location location = Location.createLocation(name);
 
-    LocationInventory locationInventory = LocationInventory.createLocationInventory(inventory, location);
+    LocationInventory locationInventory =
+        LocationInventory.createLocationInventory(inventory, location);
     location.addLocationInventory(locationInventory);
 
     locationRepository.save(location);
@@ -46,6 +49,12 @@ public class LocationService {
   public Location findById(Integer locationId) {
     Location location = returnLocation(locationRepository.findById(locationId));
     return location;
+  }
+
+  // Build the location form and return
+  public LocationForm createLocationForm(Location location) {
+    LocationForm locationForm = LocationForm.builder().name(location.getName()).build();
+    return locationForm;
   }
 
   public List<Location> findLocations() {
@@ -77,5 +86,4 @@ public class LocationService {
     }
     return location;
   }
-
 }

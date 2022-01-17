@@ -7,7 +7,7 @@
 4. Get to the inventoryProject directory by `cd inventoryProject>`
 5. Run by: `mvn clean spring-boot:run`
 6. Open the browser and type: http://localhost:8080
-7. If having an issue with connecting to the db, type: `http://localhost:8080/h2-console` and write `jdbc:h2:mem:testdb` in `JDBC URL` section
+7. If having an issue with connecting to the db, type: `http://localhost:8080/h2-console` and put `jdbc:h2:mem:testdb` in `JDBC URL` section. In case of testing, data is viewable and accessible through this console. 
 
 ### About this project:
 - Basic CRUD functionality, which creates, edit, delete, view list of the inventories
@@ -18,6 +18,7 @@
 ### It can be developed further by:
 - Applying restrictions to the variables (such as: cannot be null, or no duplicates, but then error handling should be implemented accordingly)
 - Allowing location to have multiple inventories. 
+- More front-end side implementation can be done using bootstrap. The project designed html files to be scalable by fragmentizing the html files. 
 
 
 ### Technologies:

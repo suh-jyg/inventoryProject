@@ -30,7 +30,8 @@ public class LocationController {
 
   // Posts the location
   @PostMapping("/location/new")
-  public String createLocation(LocationForm form, Model model, @RequestParam("inventoryId") Integer inventoryId) {
+  public String createLocation(
+      LocationForm form, Model model, @RequestParam("inventoryId") Integer inventoryId) {
     String name = form.getName();
     locationService.createLocation(name, inventoryId);
     return "redirect:/location";
@@ -62,10 +63,7 @@ public class LocationController {
     Location location = locationService.findById(locationId);
     model.addAttribute("location", location);
 
-    LocationForm locationForm = LocationForm.builder()
-            .name(location.getName())
-            .build();
-
+    LocationForm locationForm = locationService.createLocationForm(location);
     model.addAttribute("form", locationForm);
     return "location/updateLocationForm";
   }
@@ -73,8 +71,7 @@ public class LocationController {
   // Post the update
   @PostMapping("location/{locationId}/edit")
   public String updateLocation(
-      @PathVariable("locationId") Integer locationId,
-      @ModelAttribute("form") InventoryForm form) {
+      @PathVariable("locationId") Integer locationId, @ModelAttribute("form") InventoryForm form) {
     locationService.updateLocation(locationId, form.getName());
     return "redirect:/location";
   }
@@ -86,6 +83,6 @@ public class LocationController {
     return "redirect:/location";
   }
 
-  //TODO can be developed further by allow locations have multiple inventories
+  // TODO can be developed further by allow locations have multiple inventories
 
 }

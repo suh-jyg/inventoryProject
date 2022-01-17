@@ -32,7 +32,6 @@ public class InventoryService {
     inventory.setName(name);
     inventory.setType(type);
     inventory.setDescription(desc);
-
   }
 
   // Delete the inventory
@@ -43,6 +42,16 @@ public class InventoryService {
 
   public List<Inventory> findInventories() {
     return inventoryRepository.findAll();
+  }
+
+  // Create inventoryForm then return
+  public InventoryForm createInventoryForm(Inventory inventory) {
+    InventoryForm inventoryForm = InventoryForm.builder()
+            .name(inventory.getName())
+            .type(inventory.getType())
+            .description(inventory.getDescription())
+            .build();
+    return inventoryForm;
   }
 
   public Inventory findById(Integer inventoryId) {
@@ -61,6 +70,4 @@ public class InventoryService {
     }
     return inventory;
   }
-
-
 }
