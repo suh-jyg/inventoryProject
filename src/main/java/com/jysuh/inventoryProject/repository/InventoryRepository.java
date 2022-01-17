@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
     Inventory save(Inventory inventory);
-    Optional<Inventory> findById(Integer id);
     Optional<Inventory> findByName(String name);
     List<Inventory> findAll();
 }

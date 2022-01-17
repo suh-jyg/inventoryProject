@@ -22,6 +22,14 @@ public class InventoryService {
         return inventory.getId();
     }
 
+    @Transactional
+    public void updateInventory(Integer inventoryId, String name, int price, int quantity) {
+        Optional<Inventory> foundInventory = inventoryRepository.findById(inventoryId);
+        foundInventory.ifPresent(inventory -> inventory.setName(name));
+        foundInventory.ifPresent(inventory -> inventory.setPrice(price));
+        foundInventory.ifPresent(inventory -> inventory.setQuantity(quantity));
+    }
+
     private void checkDuplicatedInventory(Inventory inventory) {
         if (inventoryRepository.findByName(inventory.getName()).isPresent() == true){
             throw new IllegalStateException("Inventory with same name already exists");
@@ -32,7 +40,19 @@ public class InventoryService {
         return inventoryRepository.findAll();
     }
 
-    public Optional<Inventory> findInventoryByID(Inventory inventory){
-        return inventoryRepository.findById(inventory.getId());
+    public Inventory findById(Integer inventoryId){
+        Optional<Inventory> optional = inventoryRepository.findById(inventoryId);
+        Inventory inventory = null;
+        if (optional.isPresent()) {
+            inventory = optional.get();
+        }
+        else {
+            throw new RuntimeException(" Inventory not found for id :: " + inventoryId);
+        }
+        return inventory;
+    }
+
+    public void deleteInventoryById(Integer inventoryId) {
+        inventoryRepository.deleteById(inventoryId);
     }
 }

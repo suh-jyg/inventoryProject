@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class InventoryController {
@@ -42,4 +45,29 @@ public class InventoryController {
         return "inventories/inventoryList";
     }
 
+    @GetMapping("inventories/{inventoryId}/edit")
+    public String updateInventoryForm(@PathVariable("inventoryId") Integer inventoryID, Model model) {
+        Inventory foundInventory = inventoryService.findById(inventoryID);
+
+        InventoryForm form = new InventoryForm();
+        form.setId(foundInventory.getId());
+        form.setName(foundInventory.getName());
+        form.setPrice(foundInventory.getPrice());
+        form.setQuantity(foundInventory.getQuantity());
+
+        model.addAttribute("form", form);
+        return "inventories/updateInventoryForm";
+    }
+
+    @PostMapping("inventories/{inventoryId}/edit")
+    public String updateInventory(@PathVariable("inventoryId") Integer inventoryId, @ModelAttribute("form") InventoryForm form) {
+        inventoryService.updateInventory(inventoryId,form.getName(), form.getPrice(), form.getQuantity());
+        return "redirect:/inventories";
+    }
+
+    @GetMapping("/inventories/{inventoryId}/delete")
+    public String deleteInventories(@PathVariable("inventoryId") Integer inventoryId) {
+        inventoryService.deleteInventoryById(inventoryId);
+        return "redirect:/inventories";
+    }
 }

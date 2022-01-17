@@ -21,9 +21,8 @@
                 <td th:text="${inventory.name}"></td>
                 <td th:text="${inventory.price}"></td>
                 <td th:text="${inventory.quantity}"></td>
-                <td>
-                    <a href="#" th:href="@{/inventories/{id}/edit (id=${inventory.id})}"
-                       class="btn btn-primary" role="button">Edit</a>
+                <td><a class="btn btn-primary" th:href="@{/inventories/{id}/edit (id=${inventory.id})}">Update</a>
+                    <a class="btn btn-danger" th:href="@{/inventories/{id}/delete (id=${inventory.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>
