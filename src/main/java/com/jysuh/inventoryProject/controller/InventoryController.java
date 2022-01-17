@@ -23,7 +23,7 @@ public class InventoryController {
     }
 
     @GetMapping("/inventories/new")
-    public String createForm(Model model){
+    public String createForm(Model model) {
         model.addAttribute("form", new InventoryForm());
         return "inventories/createNewInventoryForm";
     }
@@ -61,7 +61,7 @@ public class InventoryController {
 
     @PostMapping("inventories/{inventoryId}/edit")
     public String updateInventory(@PathVariable("inventoryId") Integer inventoryId, @ModelAttribute("form") InventoryForm form) {
-        inventoryService.updateInventory(inventoryId,form.getName(), form.getPrice(), form.getQuantity());
+        inventoryService.updateInventory(inventoryId, form.getName(), form.getPrice(), form.getQuantity());
         return "redirect:/inventories";
     }
 
