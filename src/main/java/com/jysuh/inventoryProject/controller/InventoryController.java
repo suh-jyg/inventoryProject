@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class InventoryController {
@@ -22,13 +21,13 @@ public class InventoryController {
     this.inventoryService = inventoryService;
   }
 
-  @GetMapping("/inventories/new")
+  @GetMapping("/inventory/new")
   public String createForm(Model model) {
     model.addAttribute("form", new InventoryForm());
-    return "inventories/createNewInventoryForm";
+    return "inventory/createNewInventoryForm";
   }
 
-  @PostMapping("/inventories/new")
+  @PostMapping("/inventory/new")
   public String createInventory(InventoryForm form) {
     Inventory inventory = new Inventory();
     inventory.setName(form.getName());
@@ -38,14 +37,14 @@ public class InventoryController {
     return "redirect:/";
   }
 
-  @GetMapping("/inventories")
+  @GetMapping("/inventory")
   public String list(Model model) {
     List<Inventory> inventories = inventoryService.findInventories();
     model.addAttribute("inventories", inventories);
-    return "inventories/inventoryList";
+    return "inventory/inventoryList";
   }
 
-  @GetMapping("inventories/{inventoryId}/edit")
+  @GetMapping("inventory/{inventoryId}/edit")
   public String updateInventoryForm(@PathVariable("inventoryId") Integer inventoryID, Model model) {
     Inventory inventory = inventoryService.findById(inventoryID);
 
@@ -55,17 +54,17 @@ public class InventoryController {
     form.setQuantity(inventory.getQuantity());
 
     model.addAttribute("form", form);
-    return "inventories/updateInventoryForm";
+    return "inventory/updateInventoryForm";
   }
 
-  @PostMapping("inventories/{inventoryId}/edit")
+  @PostMapping("inventory/{inventoryId}/edit")
   public String updateInventory(
       @PathVariable("inventoryId") Integer inventoryId,
       @ModelAttribute("form") InventoryForm form) {
 
     inventoryService.updateInventory(
         inventoryId, form.getName(), form.getPrice(), form.getQuantity());
-    return "redirect:/inventories";
+    return "redirect:/inventory";
   }
 
   @GetMapping("/inventories/{inventoryId}/delete")

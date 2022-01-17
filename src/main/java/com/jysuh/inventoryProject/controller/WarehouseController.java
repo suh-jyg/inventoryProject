@@ -19,34 +19,34 @@ public class WarehouseController {
   private final WarehouseService warehouseService;
   private final InventoryService inventoryService;
 
-  @GetMapping("/warehouses/new")
+  @GetMapping("/warehouse/new")
   public String createForm(Model model) {
     List<Inventory> inventories = inventoryService.findInventories();
     model.addAttribute("inventories", inventories);
     model.addAttribute("form", new WarehouseForm());
-    return "warehouses/createNewWarehouseForm";
+    return "warehouse/createNewWarehouseForm";
   }
 
-  @PostMapping("/warehouses/new")
+  @PostMapping("/warehouse/new")
   public String createWarehouse(WarehouseForm form, Model model, @RequestParam("id") Integer id) {
     String name = form.getName();
     warehouseService.create(name, id);
-    return "redirect:/warehouses";
+    return "redirect:/warehouse";
   }
 
-  @GetMapping("/warehouses")
+  @GetMapping("/warehouse")
   public String warehouseList(Model model) {
     List<Warehouse> warehouses = warehouseService.findWarehouses();
     model.addAttribute("warehouses", warehouses);
-    return "warehouses/warehouseList";
+    return "warehouse/warehouseList";
   }
 
-  @GetMapping("warehouses/{warehouseId}")
+  @GetMapping("warehouse/{warehouseId}")
   public String getWarehouseContent(@PathVariable("warehouseId") Integer warehouseId, Model model) {
     Warehouse warehouse = warehouseService.findById(warehouseId);
     List<WarehouseInventory> warehouseInventories = warehouseService.findWarehouseInventories(warehouseId);
     model.addAttribute("warehouse", warehouse);
     model.addAttribute("warehouseInventories", warehouseInventories);
-    return "warehouses/warehouse";
+    return "warehouse/warehouse";
   }
 }

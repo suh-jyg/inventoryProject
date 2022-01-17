@@ -1,27 +1,26 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
+<head th:replace="fragment/header :: header">
     <title>Inventory Project</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div th:replace="fragment/bodyHeader :: bodyHeader" />
     <div class="jumbotron">
         <h1>Inventory Project</h1>
         <p class="lead">Inventory Management</p>
         <p>
-            <a class="btn btn-lg btn-dark" href="/inventories/new">Add a Inventory</a>
-            <a class="btn btn-lg btn-dark" href="/inventories">List of Inventories</a>
+            <a class="btn btn-lg btn-dark" href="/inventory/new">Add a Inventory</a>
+            <a class="btn btn-lg btn-dark" href="/inventory">List of Inventories</a>
         </p>
         <p class="lead">Warehouse Management</p>
         <p>
-            <a class="btn btn-lg btn-info" href="/warehouses/new">Add a Warehouse</a>
-            <a class="btn btn-lg btn-info" href="/warehouses">List of Warehouses</a>
-            <a class="btn btn-lg btn-info" href="/warehouses/assign">Assign Inventory to a Warehouse</a>
+            <a class="btn btn-lg btn-info" href="/warehouse/new">Add a Warehouse</a>
+            <a class="btn btn-lg btn-info" href="/warehouse">List of Warehouses</a>
         </p>
     </div>
-    <div th:replace="fragments/footer :: footer" />
+    <div th:replace="fragment/footer :: footer" />
 </div> <!-- /container -->
 </body>
 </html>
