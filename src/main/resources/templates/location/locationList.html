@@ -4,12 +4,12 @@
 <body>
 <div class="container">
     <div th:replace="fragment/bodyHeader :: bodyHeader"/>
-    <h3> List of Warehouses </h3>
+    <h3> List of Locations </h3>
     <div>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Name of Warehouse</th>
+                <th>Name of Location</th>
                 <th>Assigned Inventory</th>
                 <th>Edit name</th>
                 <th>Delete</th>
@@ -17,11 +17,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="warehouse : ${warehouses}">
-                <td th:text="${warehouse.name}"></td>
-                <td><a class="btn btn-primary" th:href="@{/warehouse/{id} (id=${warehouse.id})}">Click</a></td>
-                <td><a class="btn btn-primary" th:href="@{/warehouse/{id}/edit (id=${warehouse.id})}">Click</a></td>
-                <td><a class="btn btn-danger" th:href="@{/warehouse/{id}/delete (id=${warehouse.id})}">Click</a></td>
+            <tr th:each="location : ${locations}">
+                <td th:text="${location.name}"></td>
+                <td><a class="btn btn-primary" th:href="@{/location/{id} (id=${location.id})}">Click</a></td>
+                <td><a class="btn btn-primary" th:href="@{/location/{id}/edit (id=${location.id})}">Click</a></td>
+                <td><a class="btn btn-danger" th:href="@{/location/{id}/delete (id=${location.id})}">Click</a></td>
             </tr>
             </tbody>
         </table>

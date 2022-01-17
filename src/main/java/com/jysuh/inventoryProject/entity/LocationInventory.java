@@ -14,11 +14,11 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class WarehouseInventory {
+public class LocationInventory {
 
   @Id
   @GeneratedValue
-  @Column(name = "warehouse_inventory_id")
+  @Column(name = "location_inventory_id")
   private Integer id;
 
   @ManyToOne(fetch = LAZY)
@@ -27,13 +27,13 @@ public class WarehouseInventory {
 
   @JsonIgnore
   @ManyToOne(fetch = LAZY)
-  @JoinColumn(name = "warehouse_id")
-  private Warehouse warehouse;
+  @JoinColumn(name = "location_id")
+  private Location location;
 
-  public static WarehouseInventory createWarehouseInventory(Inventory inventory, Warehouse warehouse) {
-    WarehouseInventory warehouseInventory = new WarehouseInventory();
-    warehouseInventory.setInventory(inventory);
-    warehouseInventory.setWarehouse(warehouse);
-    return warehouseInventory;
+  public static LocationInventory createLocationInventory(Inventory inventory, Location location) {
+    LocationInventory locationInventory = new LocationInventory();
+    locationInventory.setInventory(inventory);
+    locationInventory.setLocation(location);
+    return locationInventory;
   }
 }

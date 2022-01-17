@@ -6,7 +6,7 @@
   <div th:replace="fragment/bodyHeader :: bodyHeader"/>
   <div>
     <table class="table table-striped">
-      <h3> List of the inventories of the warehouse:  <span th:text="${warehouse.getName()}"></span></h3>
+      <h3> List of the inventories of the location:  <span th:text="${location.getName()}"></span></h3>
       <thead>
       <tr>
         <th>Name</th>
@@ -16,10 +16,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr th:each="warehouseInventory : ${warehouseInventories}">
-        <td th:text="${warehouseInventory.inventory.name}"></td>
-        <td th:text="${warehouseInventory.inventory.type}"></td>
-        <td th:text="${warehouseInventory.inventory.description}"></td>
+      <tr th:each="locationInventory : ${locationInventories}">
+        <td th:text="${locationInventory.inventory.name}"></td>
+        <td th:text="${locationInventory.inventory.type}"></td>
+        <td th:text="${locationInventory.inventory.description}"></td>
       </tr>
       </tbody>
     </table>

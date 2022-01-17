@@ -4,10 +4,10 @@
 <body>
 <div class="container">
   <div th:replace="fragment/bodyHeader :: bodyHeader"/>
-  <form th:action="@{/warehouse/new}" th:object="${form}" method="post">
+  <form th:action="@{/location/new}" th:object="${form}" method="post">
     <div class="form-group">
       <label th:for="name">Name</label>
-      <input type="text" th:field="*{name}" class="form-control"  placeholder="Enter the name of the warehouse">
+      <input type="text" th:field="*{name}" class="form-control"  placeholder="Enter the name of the location">
     </div>
 
     <div class="form-group">

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WarehouseForm {
+public class LocationForm {
     private Integer id;
 
     private String name;
