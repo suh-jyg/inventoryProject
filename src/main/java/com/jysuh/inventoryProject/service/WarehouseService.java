@@ -39,13 +39,23 @@ public class WarehouseService {
     return warehouse.getId();
   }
 
+  @Transactional
+  public void updateWarehouse(Integer warehouseId, String name) {
+    Optional<Warehouse> warehouse = warehouseRepository.findById(warehouseId);
+    warehouse.ifPresent(i -> i.setName(name));
+  }
+
+  public void deleteWarehouseById(Integer warehouseId) {
+    warehouseRepository.deleteById(warehouseId);
+  }
+
   public Warehouse findById(Integer warehouseId) {
     Optional<Warehouse> optional = warehouseRepository.findById(warehouseId);
     Warehouse warehouse = null;
     if (optional.isPresent()) {
       warehouse = optional.get();
     } else {
-      throw new RuntimeException(" Inventory not found for id :: " + warehouseId);
+      throw new RuntimeException(" WarehouseInventory not found for id :: " + warehouseId);
     }
     return warehouse;
   }
@@ -60,7 +70,7 @@ public class WarehouseService {
     if (optional.isPresent()) {
       warehouse = optional.get();
     } else {
-      throw new RuntimeException(" Inventory not found for id :: " + warehouseId);
+      throw new RuntimeException(" WarehouseInventory not found for id :: " + warehouseId);
     }
     return warehouse.getWarehouseInventories();
   }

@@ -68,9 +68,9 @@ public class InventoryController {
     return "redirect:/inventory";
   }
 
-  @GetMapping("/inventories/{inventoryId}/delete")
+  @GetMapping("/inventory/{inventoryId}/delete")
   public String deleteInventories(@PathVariable("inventoryId") Integer inventoryId) {
     inventoryService.deleteInventoryById(inventoryId);
-    return "redirect:/inventories";
+    return "redirect:/inventory";
   }
 }

@@ -16,7 +16,6 @@ public class InventoryService {
 
   @Transactional
   public Integer create(Inventory inventory) {
-    checkDuplicatedInventory(inventory);
     inventoryRepository.save(inventory);
     return inventory.getId();
   }
@@ -31,12 +30,6 @@ public class InventoryService {
 
   public void deleteInventoryById(Integer inventoryId) {
     inventoryRepository.deleteById(inventoryId);
-  }
-
-  private void checkDuplicatedInventory(Inventory inventory) {
-    if (inventoryRepository.findByName(inventory.getName()).isPresent() == true) {
-      throw new IllegalStateException("Inventory with same name already exists");
-    }
   }
 
   public List<Inventory> findInventories() {

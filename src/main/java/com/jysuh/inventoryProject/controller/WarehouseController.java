@@ -49,4 +49,29 @@ public class WarehouseController {
     model.addAttribute("warehouseInventories", warehouseInventories);
     return "warehouse/warehouse";
   }
+
+  @GetMapping("warehouse/{warehouseId}/edit")
+  public String updateWarehouseForm(@PathVariable("warehouseId") Integer warehouseId, Model model) {
+    Warehouse warehouse = warehouseService.findById(warehouseId);
+    model.addAttribute("warehouse", warehouse);
+
+    WarehouseForm form = new WarehouseForm();
+    form.setName(warehouse.getName());
+
+    model.addAttribute("form", form);
+    return "warehouse/updateWarehouseForm";
+  }
+
+  @PostMapping("warehouse/{warehouseId}/edit")
+  public String updateWarehouse(@PathVariable("warehouseId") Integer warehouseId, @ModelAttribute("form") InventoryForm form) {
+    warehouseService.updateWarehouse(warehouseId, form.getName());
+    return "redirect:/warehouse";
+  }
+
+  @GetMapping("warehouse/{warehouseId}/delete")
+  public String deleteWarehouse(@PathVariable("warehouseId") Integer warehouseId) {
+    warehouseService.deleteWarehouseById(warehouseId);
+    return "redirect:/warehouse";
+  }
+
 }
