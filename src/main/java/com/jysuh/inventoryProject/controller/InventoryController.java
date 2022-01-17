@@ -50,7 +50,6 @@ public class InventoryController {
     Inventory inventory = inventoryService.findById(inventoryID);
 
     InventoryForm form = new InventoryForm();
-    form.setId(inventory.getId());
     form.setName(inventory.getName());
     form.setPrice(inventory.getPrice());
     form.setQuantity(inventory.getQuantity());

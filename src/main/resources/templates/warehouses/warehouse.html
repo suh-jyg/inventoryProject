@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<div class="container">
+  <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+  <div>
+    <table class="table table-striped">
+      <h2> Name of a warehouse:  <span th:text="${warehouse.getName()}"></span></h2>
+      <h3> List of the inventories:</h3>
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="warehouseInventory : ${warehouseInventories}">
+        <td th:text="${warehouseInventory.inventory.getName()}"></td>
+        <td th:text="${warehouseInventory.inventory.getPrice()}"></td>
+        <td th:text="${warehouseInventory.inventory.getQuantity()}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+</body>
+</html>

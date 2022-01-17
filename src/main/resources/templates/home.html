@@ -1,15 +1,27 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Inventory Project</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
 <body>
 <div class="container">
-    <div>
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <div class="jumbotron">
         <h1>Inventory Project</h1>
-        <p>Functions:</p>
+        <p class="lead">Inventory Management</p>
         <p>
-            <a href="/inventories/new">Create Inventory</a>
-            <a href="/inventories">Inventory List</a>
+            <a class="btn btn-lg btn-dark" href="/inventories/new">Add a Inventory</a>
+            <a class="btn btn-lg btn-dark" href="/inventories">List of Inventories</a>
+        </p>
+        <p class="lead">Warehouse Management</p>
+        <p>
+            <a class="btn btn-lg btn-info" href="/warehouses/new">Add a Warehouse</a>
+            <a class="btn btn-lg btn-info" href="/warehouses">List of Warehouses</a>
+            <a class="btn btn-lg btn-info" href="/warehouses/assign">Assign Inventory to a Warehouse</a>
         </p>
     </div>
+    <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>
 </html>

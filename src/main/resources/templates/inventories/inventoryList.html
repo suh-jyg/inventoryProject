@@ -8,21 +8,22 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Update</th>
+                <th>Delete</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="inventory : ${inventories}">
-                <td th:text="${inventory.id}"></td>
                 <td th:text="${inventory.name}"></td>
                 <td th:text="${inventory.price}"></td>
                 <td th:text="${inventory.quantity}"></td>
                 <td><a class="btn btn-primary" th:href="@{/inventories/{id}/edit (id=${inventory.id})}">Update</a>
-                    <a class="btn btn-danger" th:href="@{/inventories/{id}/delete (id=${inventory.id})}">Delete</a>
+                </td>
+                <td><a class="btn btn-danger" th:href="@{/inventories/{id}/delete (id=${inventory.id})}">Delete</a>
                 </td>
             </tr>
             </tbody>

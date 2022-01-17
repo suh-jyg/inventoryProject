@@ -29,6 +29,10 @@ public class InventoryService {
     inventory.ifPresent(i -> i.setQuantity(quantity));
   }
 
+  public void deleteInventoryById(Integer inventoryId) {
+    inventoryRepository.deleteById(inventoryId);
+  }
+
   private void checkDuplicatedInventory(Inventory inventory) {
     if (inventoryRepository.findByName(inventory.getName()).isPresent() == true) {
       throw new IllegalStateException("Inventory with same name already exists");
@@ -50,7 +54,4 @@ public class InventoryService {
     return inventory;
   }
 
-  public void deleteInventoryById(Integer inventoryId) {
-    inventoryRepository.deleteById(inventoryId);
-  }
 }
