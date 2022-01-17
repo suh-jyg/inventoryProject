@@ -9,8 +9,8 @@
             <thead>
             <tr>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <th>Type</th>
+                <th>Description</th>
                 <th>Update</th>
                 <th>Delete</th>
                 <th></th>
@@ -19,8 +19,8 @@
             <tbody>
             <tr th:each="inventory : ${inventories}">
                 <td th:text="${inventory.name}"></td>
-                <td th:text="${inventory.price}"></td>
-                <td th:text="${inventory.quantity}"></td>
+                <td th:text="${inventory.type}"></td>
+                <td th:text="${inventory.description}"></td>
                 <td><a class="btn btn-primary" th:href="@{/inventory/{id}/edit (id=${inventory.id})}">Update</a>
                 </td>
                 <td><a class="btn btn-danger" th:href="@{/inventory/{id}/delete (id=${inventory.id})}">Delete</a>

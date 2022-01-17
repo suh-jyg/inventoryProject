@@ -4,6 +4,7 @@
 <body>
 <div class="container">
     <div th:replace="fragment/bodyHeader :: bodyHeader"/>
+    <h3> Creating an Inventory: </h3>
     <form th:action="@{/inventory/new}" th:object="${form}" method="post">
         <div class="form-group">
             <label th:for="name">Name</label>
@@ -11,14 +12,14 @@
                    placeholder="Enter the name of the inventory">
         </div>
         <div class="form-group">
-            <label th:for="price">Price</label>
-            <input type="number" th:field="*{price}" class="form-control"
-                   placeholder="Enter the price/cost of the inventory">
+            <label th:for="type">Type</label>
+            <input type="text" th:field="*{type}" class="form-control"
+                   placeholder="Enter the type/cost of the inventory">
         </div>
         <div class="form-group">
-            <label th:for="quantity">Quantity</label>
-            <input type="number" th:field="*{quantity}" class="form-control"
-                   placeholder="Enter the quantity of the inventory">
+            <label th:for="description">Description</label>
+            <input type="text" th:field="*{description}" class="form-control"
+                   placeholder="Enter the description of the inventory">
         </div>
 
         <br/>

@@ -22,11 +22,11 @@ public class InventoryService {
   }
 
   @Transactional
-  public void updateInventory(Integer inventoryId, String name, int price, int quantity) {
+  public void updateInventory(Integer inventoryId, String name, String type, String desc) {
     Optional<Inventory> inventory = inventoryRepository.findById(inventoryId);
     inventory.ifPresent(i -> i.setName(name));
-    inventory.ifPresent(i -> i.setPrice(price));
-    inventory.ifPresent(i -> i.setQuantity(quantity));
+    inventory.ifPresent(i -> i.setType(type));
+    inventory.ifPresent(i -> i.setDescription(desc));
   }
 
   public void deleteInventoryById(Integer inventoryId) {

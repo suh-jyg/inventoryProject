@@ -10,7 +10,7 @@ public class InventoryForm {
 
   private String name;
 
-  private Integer quantity;
+  private String type;
 
-  private Integer price;
+  private String description;
 }

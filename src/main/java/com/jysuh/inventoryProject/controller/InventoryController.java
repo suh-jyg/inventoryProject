@@ -31,8 +31,8 @@ public class InventoryController {
   public String createInventory(InventoryForm form) {
     Inventory inventory = new Inventory();
     inventory.setName(form.getName());
-    inventory.setPrice(form.getPrice());
-    inventory.setQuantity(form.getQuantity());
+    inventory.setType(form.getType());
+    inventory.setDescription(form.getDescription());
     inventoryService.create(inventory);
     return "redirect:/";
   }
@@ -47,11 +47,12 @@ public class InventoryController {
   @GetMapping("inventory/{inventoryId}/edit")
   public String updateInventoryForm(@PathVariable("inventoryId") Integer inventoryID, Model model) {
     Inventory inventory = inventoryService.findById(inventoryID);
+    model.addAttribute("inventory", inventory);
 
     InventoryForm form = new InventoryForm();
     form.setName(inventory.getName());
-    form.setPrice(inventory.getPrice());
-    form.setQuantity(inventory.getQuantity());
+    form.setType(inventory.getType());
+    form.setDescription(inventory.getDescription());
 
     model.addAttribute("form", form);
     return "inventory/updateInventoryForm";
@@ -63,7 +64,7 @@ public class InventoryController {
       @ModelAttribute("form") InventoryForm form) {
 
     inventoryService.updateInventory(
-        inventoryId, form.getName(), form.getPrice(), form.getQuantity());
+        inventoryId, form.getName(), form.getType(), form.getDescription());
     return "redirect:/inventory";
   }
 
