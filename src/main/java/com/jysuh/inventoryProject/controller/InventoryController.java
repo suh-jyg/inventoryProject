@@ -15,59 +15,63 @@ import java.util.Optional;
 
 @Controller
 public class InventoryController {
-    private final InventoryService inventoryService;
+  private final InventoryService inventoryService;
 
-    @Autowired
-    public InventoryController(InventoryService inventoryService) {
-        this.inventoryService = inventoryService;
-    }
+  @Autowired
+  public InventoryController(InventoryService inventoryService) {
+    this.inventoryService = inventoryService;
+  }
 
-    @GetMapping("/inventories/new")
-    public String createForm(Model model) {
-        model.addAttribute("form", new InventoryForm());
-        return "inventories/createNewInventoryForm";
-    }
+  @GetMapping("/inventories/new")
+  public String createForm(Model model) {
+    model.addAttribute("form", new InventoryForm());
+    return "inventories/createNewInventoryForm";
+  }
 
-    @PostMapping("/inventories/new")
-    public String createInventory(InventoryForm form) {
-        Inventory inventory = new Inventory();
-        inventory.setName(form.getName());
-        inventory.setPrice(form.getPrice());
-        inventory.setQuantity(form.getQuantity());
-        inventoryService.create(inventory);
-        return "redirect:/";
-    }
+  @PostMapping("/inventories/new")
+  public String createInventory(InventoryForm form) {
+    Inventory inventory = new Inventory();
+    inventory.setName(form.getName());
+    inventory.setPrice(form.getPrice());
+    inventory.setQuantity(form.getQuantity());
+    inventoryService.create(inventory);
+    return "redirect:/";
+  }
 
-    @GetMapping("/inventories")
-    public String list(Model model) {
-        List<Inventory> inventories = inventoryService.findInventories();
-        model.addAttribute("inventories", inventories);
-        return "inventories/inventoryList";
-    }
+  @GetMapping("/inventories")
+  public String list(Model model) {
+    List<Inventory> inventories = inventoryService.findInventories();
+    model.addAttribute("inventories", inventories);
+    return "inventories/inventoryList";
+  }
 
-    @GetMapping("inventories/{inventoryId}/edit")
-    public String updateInventoryForm(@PathVariable("inventoryId") Integer inventoryID, Model model) {
-        Inventory foundInventory = inventoryService.findById(inventoryID);
+  @GetMapping("inventories/{inventoryId}/edit")
+  public String updateInventoryForm(@PathVariable("inventoryId") Integer inventoryID, Model model) {
+    Inventory inventory = inventoryService.findById(inventoryID);
 
-        InventoryForm form = new InventoryForm();
-        form.setId(foundInventory.getId());
-        form.setName(foundInventory.getName());
-        form.setPrice(foundInventory.getPrice());
-        form.setQuantity(foundInventory.getQuantity());
+    InventoryForm form = new InventoryForm();
+    form.setId(inventory.getId());
+    form.setName(inventory.getName());
+    form.setPrice(inventory.getPrice());
+    form.setQuantity(inventory.getQuantity());
 
-        model.addAttribute("form", form);
-        return "inventories/updateInventoryForm";
-    }
+    model.addAttribute("form", form);
+    return "inventories/updateInventoryForm";
+  }
 
-    @PostMapping("inventories/{inventoryId}/edit")
-    public String updateInventory(@PathVariable("inventoryId") Integer inventoryId, @ModelAttribute("form") InventoryForm form) {
-        inventoryService.updateInventory(inventoryId, form.getName(), form.getPrice(), form.getQuantity());
-        return "redirect:/inventories";
-    }
+  @PostMapping("inventories/{inventoryId}/edit")
+  public String updateInventory(
+      @PathVariable("inventoryId") Integer inventoryId,
+      @ModelAttribute("form") InventoryForm form) {
 
-    @GetMapping("/inventories/{inventoryId}/delete")
-    public String deleteInventories(@PathVariable("inventoryId") Integer inventoryId) {
-        inventoryService.deleteInventoryById(inventoryId);
-        return "redirect:/inventories";
-    }
+    inventoryService.updateInventory(
+        inventoryId, form.getName(), form.getPrice(), form.getQuantity());
+    return "redirect:/inventories";
+  }
+
+  @GetMapping("/inventories/{inventoryId}/delete")
+  public String deleteInventories(@PathVariable("inventoryId") Integer inventoryId) {
+    inventoryService.deleteInventoryById(inventoryId);
+    return "redirect:/inventories";
+  }
 }

@@ -7,15 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Config {
-    private final InventoryRepository inventoryRepository;
+  private final InventoryRepository inventoryRepository;
 
-    public Config(InventoryRepository inventoryRepository) {
-        this.inventoryRepository = inventoryRepository;
-    }
+  public Config(InventoryRepository inventoryRepository) {
+    this.inventoryRepository = inventoryRepository;
+  }
 
-    @Bean
-    public InventoryService inventoryService() {
-        return new InventoryService(inventoryRepository);
-    }
-
+  @Bean
+  public InventoryService inventoryService() {
+    return new InventoryService(inventoryRepository);
+  }
 }

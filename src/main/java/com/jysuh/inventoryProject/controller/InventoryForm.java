@@ -6,12 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InventoryForm {
-    private Integer id;
+  private Integer id;
 
-    private String name;
+  private String name;
 
-    private Integer quantity;
+  private Integer quantity;
 
-    private Integer price;
-
+  private Integer price;
 }
