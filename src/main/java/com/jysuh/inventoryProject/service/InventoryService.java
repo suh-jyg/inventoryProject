@@ -9,13 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 public class InventoryService {
   private final InventoryRepository inventoryRepository;
 
-  public InventoryService(InventoryRepository inventoryRepository) {
-    this.inventoryRepository = inventoryRepository;
-  }
-
+  // Create the inventory through the builder
   @Transactional
   public Inventory createInventory(InventoryForm inventoryForm) {
     Inventory newInventory = Inventory.builder()
@@ -27,6 +25,7 @@ public class InventoryService {
     return newInventory;
   }
 
+  // Update the inventory by the input variables
   @Transactional
   public void updateInventory(Integer inventoryId, String name, String type, String desc) {
     Inventory inventory = returnInventory(inventoryRepository.findById(inventoryId));
@@ -36,6 +35,7 @@ public class InventoryService {
 
   }
 
+  // Delete the inventory
   @Transactional
   public void deleteInventoryById(Integer inventoryId) {
     inventoryRepository.deleteById(inventoryId);
@@ -51,6 +51,7 @@ public class InventoryService {
     return inventory;
   }
 
+  // Since JPA returns the Objects as optional, remove it
   public Inventory returnInventory(Optional<Inventory> optionalInv) {
     Inventory inventory = null;
     if (optionalInv.isPresent()) {

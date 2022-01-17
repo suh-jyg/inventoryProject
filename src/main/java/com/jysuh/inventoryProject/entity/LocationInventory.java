@@ -21,6 +21,7 @@ public class LocationInventory {
   @Column(name = "location_inventory_id")
   private Integer id;
 
+  // Made as list and applied mapping restriction for the scalability
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "inventory_id")
   private Inventory inventory;

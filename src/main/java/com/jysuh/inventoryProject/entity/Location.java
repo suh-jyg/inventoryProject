@@ -1,5 +1,6 @@
 package com.jysuh.inventoryProject.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "locations")
 @Getter
-@Setter
+@Setter @EqualsAndHashCode(of = "id")
 public class Location {
 
   @Id
@@ -22,6 +23,7 @@ public class Location {
 
   private String name;
 
+  // Made as list and applied mapping restriction for the scalability
   @BatchSize(size = 1000)
   @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
   private List<LocationInventory> locationInventories = new ArrayList<>();
@@ -35,5 +37,7 @@ public class Location {
     location.setName(name);
     return location;
   }
+
+  //TODO can be developed further by applying restrictions on name - such as not null, or no duplicates
 
 }

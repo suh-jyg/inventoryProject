@@ -20,4 +20,6 @@ public class Inventory {
 
   private String description;
 
+  //TODO can be developed further by applying restrictions on name - such as not null, or no duplicates
+
 }

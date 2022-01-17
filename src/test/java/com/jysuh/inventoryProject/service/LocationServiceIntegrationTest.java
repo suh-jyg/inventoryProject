@@ -1,7 +1,6 @@
 package com.jysuh.inventoryProject.service;
 
 import com.jysuh.inventoryProject.controller.InventoryForm;
-import com.jysuh.inventoryProject.controller.LocationForm;
 import com.jysuh.inventoryProject.entity.Inventory;
 import com.jysuh.inventoryProject.entity.Location;
 import com.jysuh.inventoryProject.repository.InventoryRepository;

@@ -5,21 +5,19 @@ import com.jysuh.inventoryProject.entity.Location;
 import com.jysuh.inventoryProject.entity.LocationInventory;
 import com.jysuh.inventoryProject.repository.InventoryRepository;
 import com.jysuh.inventoryProject.repository.LocationRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-
+@RequiredArgsConstructor
 public class LocationService {
   private final LocationRepository locationRepository;
   private final InventoryRepository inventoryRepository;
 
-  public LocationService(LocationRepository locationRepository, InventoryRepository inventoryRepository) {
-    this.locationRepository = locationRepository;
-    this.inventoryRepository = inventoryRepository;
-  }
-
+  // Creates the location, and the locationInventory at the same time.
+  // locationInventory is saved as list for the scalability - TODO: to develop further, allow locations to have multiple inventories
   @Transactional
   public Location createLocation(String name, Integer inventoryId) {
     Inventory inventory = returnInventory(inventoryRepository.findById(inventoryId));
@@ -32,12 +30,14 @@ public class LocationService {
     return location;
   }
 
+  // Update the location's name as input variable
   @Transactional
   public void updateLocation(Integer locationId, String name) {
     Location location = returnLocation(locationRepository.findById(locationId));
     location.setName(name);
   }
 
+  // Delete the location
   @Transactional
   public void deleteLocationById(Integer locationId) {
     locationRepository.deleteById(locationId);
@@ -57,6 +57,7 @@ public class LocationService {
     return location.getLocationInventories();
   }
 
+  // Since JPA returns the Objects as optional, remove it, and same for the method below
   public Inventory returnInventory(Optional<Inventory> optionalInv) {
     Inventory inventory = null;
     if (optionalInv.isPresent()) {
