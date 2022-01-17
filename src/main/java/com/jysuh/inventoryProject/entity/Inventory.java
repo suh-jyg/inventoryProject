@@ -1,18 +1,17 @@
 package com.jysuh.inventoryProject.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "inventory")
+@Builder @AllArgsConstructor
+@NoArgsConstructor @EqualsAndHashCode(of = "id")
 public class Inventory {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   private String name;

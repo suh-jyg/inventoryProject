@@ -2,6 +2,7 @@ package com.jysuh.inventoryProject.controller;
 
 import com.jysuh.inventoryProject.entity.Inventory;
 import com.jysuh.inventoryProject.service.InventoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class InventoryController {
   private final InventoryService inventoryService;
-
-  @Autowired
-  public InventoryController(InventoryService inventoryService) {
-    this.inventoryService = inventoryService;
-  }
 
   @GetMapping("/inventory/new")
   public String createForm(Model model) {
@@ -28,12 +25,8 @@ public class InventoryController {
   }
 
   @PostMapping("/inventory/new")
-  public String createInventory(InventoryForm form) {
-    Inventory inventory = new Inventory();
-    inventory.setName(form.getName());
-    inventory.setType(form.getType());
-    inventory.setDescription(form.getDescription());
-    inventoryService.create(inventory);
+  public String createInventory(InventoryForm inventoryForm) {
+    inventoryService.createInventory(inventoryForm);
     return "redirect:/";
   }
 
@@ -49,12 +42,13 @@ public class InventoryController {
     Inventory inventory = inventoryService.findById(inventoryID);
     model.addAttribute("inventory", inventory);
 
-    InventoryForm form = new InventoryForm();
-    form.setName(inventory.getName());
-    form.setType(inventory.getType());
-    form.setDescription(inventory.getDescription());
+    InventoryForm inventoryForm = InventoryForm.builder()
+            .name(inventory.getName())
+            .type(inventory.getType())
+            .description(inventory.getDescription())
+            .build();
 
-    model.addAttribute("form", form);
+    model.addAttribute("form", inventoryForm);
     return "inventory/updateInventoryForm";
   }
 
@@ -62,7 +56,6 @@ public class InventoryController {
   public String updateInventory(
       @PathVariable("inventoryId") Integer inventoryId,
       @ModelAttribute("form") InventoryForm form) {
-
     inventoryService.updateInventory(
         inventoryId, form.getName(), form.getType(), form.getDescription());
     return "redirect:/inventory";

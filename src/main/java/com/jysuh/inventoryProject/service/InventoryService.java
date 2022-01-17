@@ -1,5 +1,6 @@
 package com.jysuh.inventoryProject.service;
 
+import com.jysuh.inventoryProject.controller.InventoryForm;
 import com.jysuh.inventoryProject.entity.Inventory;
 import com.jysuh.inventoryProject.repository.InventoryRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,17 +16,23 @@ public class InventoryService {
   }
 
   @Transactional
-  public Integer create(Inventory inventory) {
-    inventoryRepository.save(inventory);
-    return inventory.getId();
+  public Inventory createInventory(InventoryForm inventoryForm) {
+    Inventory newInventory = Inventory.builder()
+            .name(inventoryForm.getName())
+            .type(inventoryForm.getType())
+            .description(inventoryForm.getDescription())
+            .build();
+    inventoryRepository.save(newInventory);
+    return newInventory;
   }
 
   @Transactional
   public void updateInventory(Integer inventoryId, String name, String type, String desc) {
-    Optional<Inventory> inventory = inventoryRepository.findById(inventoryId);
-    inventory.ifPresent(i -> i.setName(name));
-    inventory.ifPresent(i -> i.setType(type));
-    inventory.ifPresent(i -> i.setDescription(desc));
+    Inventory inventory = returnInventory(inventoryRepository.findById(inventoryId));
+    inventory.setName(name);
+    inventory.setType(type);
+    inventory.setDescription(desc);
+
   }
 
   @Transactional
@@ -39,13 +46,19 @@ public class InventoryService {
 
   public Inventory findById(Integer inventoryId) {
     Optional<Inventory> optional = inventoryRepository.findById(inventoryId);
+    Inventory inventory = returnInventory(optional);
+    return inventory;
+  }
+
+  public Inventory returnInventory(Optional<Inventory> optionalInv) {
     Inventory inventory = null;
-    if (optional.isPresent()) {
-      inventory = optional.get();
+    if (optionalInv.isPresent()) {
+      inventory = optionalInv.get();
     } else {
-      throw new RuntimeException(" Inventory not found for id :: " + inventoryId);
+      throw new RuntimeException(" No ID found");
     }
     return inventory;
   }
+
 
 }

@@ -21,8 +21,8 @@ public class LocationService {
   }
 
   @Transactional
-  public Integer create(String name, Integer inventoryId) {
-    Inventory inventory = removeOptionalInv(inventoryRepository.findById(inventoryId));
+  public Integer createLocation(String name, Integer inventoryId) {
+    Inventory inventory = returnInventory(inventoryRepository.findById(inventoryId));
     Location location = Location.createLocation(name);
 
     LocationInventory locationInventory = LocationInventory.createLocationInventory(inventory, location);
@@ -34,7 +34,7 @@ public class LocationService {
 
   @Transactional
   public void updateLocation(Integer locationId, String name) {
-    Location location = removeOptionalWare(locationRepository.findById(locationId));
+    Location location = returnLocation(locationRepository.findById(locationId));
     location.setName(name);
   }
 
@@ -44,13 +44,7 @@ public class LocationService {
   }
 
   public Location findById(Integer locationId) {
-    Optional<Location> optional = locationRepository.findById(locationId);
-    Location location = null;
-    if (optional.isPresent()) {
-      location = optional.get();
-    } else {
-      throw new RuntimeException(" LocationInventory not found for id :: " + locationId);
-    }
+    Location location = returnLocation(locationRepository.findById(locationId));
     return location;
   }
 
@@ -59,17 +53,11 @@ public class LocationService {
   }
 
   public List<LocationInventory> findLocationInventories(Integer locationId) {
-    Optional<Location> optional = locationRepository.findById(locationId);
-    Location location = null;
-    if (optional.isPresent()) {
-      location = optional.get();
-    } else {
-      throw new RuntimeException(" LocationInventory not found for id :: " + locationId);
-    }
+    Location location = returnLocation(locationRepository.findById(locationId));
     return location.getLocationInventories();
   }
 
-  public Inventory removeOptionalInv(Optional<Inventory> optionalInv) {
+  public Inventory returnInventory(Optional<Inventory> optionalInv) {
     Inventory inventory = null;
     if (optionalInv.isPresent()) {
       inventory = optionalInv.get();
@@ -79,7 +67,7 @@ public class LocationService {
     return inventory;
   }
 
-  public Location removeOptionalWare(Optional<Location> optionalWare) {
+  public Location returnLocation(Optional<Location> optionalWare) {
     Location location = null;
     if (optionalWare.isPresent()) {
       location = optionalWare.get();

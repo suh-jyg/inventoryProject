@@ -29,7 +29,7 @@ public class LocationController {
   @PostMapping("/location/new")
   public String createLocation(LocationForm form, Model model, @RequestParam("inventoryId") Integer inventoryId) {
     String name = form.getName();
-    locationService.create(name, inventoryId);
+    locationService.createLocation(name, inventoryId);
     return "redirect:/location";
   }
 
@@ -55,10 +55,11 @@ public class LocationController {
     Location location = locationService.findById(locationId);
     model.addAttribute("location", location);
 
-    LocationForm form = new LocationForm();
-    form.setName(location.getName());
+    LocationForm locationForm = LocationForm.builder()
+            .name(location.getName())
+            .build();
 
-    model.addAttribute("form", form);
+    model.addAttribute("form", locationForm);
     return "location/updateLocationForm";
   }
 
