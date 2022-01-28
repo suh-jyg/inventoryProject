@@ -6,6 +6,12 @@
 - Maven
 - IDE (preferably IntelliJ)
 
+### Technologies:
+- Spring Boot
+- Spring Data JPA
+- H2 Database
+- Thymeleaf
+
 ### Precedure:
 1. Download H2 database (v1.4.200 for safety) in the [link] (https://www.h2database.com/html/download-archive.html). If accidentally reinstalled H2, delete ~/test.mv.db in case it gives an error. 
 2. In H2/bin directory, give authorizations by `chmod 755 h2.sh` in terminal, then run H2 by `./h2.sh`. For windows, run `./h2.bat`
@@ -25,11 +31,4 @@
 - Applying restrictions to the variables (such as: cannot be null, or no duplicates, but then error handling should be implemented accordingly)
 - Allowing location to have multiple inventories. 
 - More front-end side implementation can be done using bootstrap. The project designed html files to be scalable by fragmentizing the html files. 
-
-
-### Technologies:
-- Spring Boot
-- Spring Data JPA
-- H2 Database
-- Thymeleaf
 
